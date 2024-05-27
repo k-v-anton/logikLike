@@ -1,14 +1,28 @@
-import { MouseEvent, memo, useContext, useEffect, useRef, useState } from 'react'
-import { CoursesStateContext } from '../../context/CoursesStateContext'
+import { memo, useEffect, useRef, useState } from 'react'
+import { useCoursesContext } from '../../hooks/useCoursesContext'
+import { Coursore } from '../Coursore'
 import { NavLink } from '../NavLink'
 import { filterCoursesByActiveTag } from '../app/App.Asistent'
+import { calcCousoreSize } from './Navigate.Asistent'
+import { HandleClickFilterType, SizeButtonType } from './Navigate.Types'
 import styles from './Navigate.module.scss'
 
-type HandleClickFilterType = (e: MouseEvent<HTMLButtonElement>) => void
-
 export const Navigate = memo(() => {
-  const { unicTagList, setActiveTagIndex, setRenderCourses, fullCourses, activeTagIndex } =
-    useContext(CoursesStateContext)
+  const [coursoreTransition, setCoursoreTransition] = useState<number>(0)
+  const [corsoreSize, setCoursoreSize] = useState<SizeButtonType>({
+    width: 0,
+    height: 0,
+  })
+
+  const navigationRef = useRef<HTMLDivElement | null>(null)
+
+  const {
+    unicTagList,
+    setActiveTagIndex,
+    setRenderCourses,
+    fullCourses,
+    activeTagIndex,
+  } = useCoursesContext()
 
   const handleClickFilters: HandleClickFilterType = (e) => {
     if (!(e.target instanceof HTMLButtonElement)) return
@@ -24,51 +38,30 @@ export const Navigate = memo(() => {
       )
     }
   }
-  
-  const navigationRef = useRef<HTMLDivElement | null>(null)
-  const [transitionY, setTransitionY] = useState<number>(0)
-
-  type SizeType ={
-    width: number
-    height: number
-  }
-  const [size, setSize] = useState<SizeType>({
-    width: 0,
-    height: 0
-  })
 
   useEffect(() => {
-    if (navigationRef && navigationRef.current) {
-      const foolHeight = navigationRef.current.offsetHeight
-      const foolWidth = navigationRef.current.offsetWidth
-      const newSizeButton = {
-        width: (foolWidth - 24),
-        height: (foolHeight - 24) / (unicTagList.length)
-      }
-       
-       setTransitionY(newSizeButton.height * activeTagIndex)
-       setSize(newSizeButton)
-    }
-    
-   
-    
-    
-  }, [activeTagIndex, unicTagList])
+    const newSizeButton = calcCousoreSize(navigationRef, unicTagList.length)
+
+    setCoursoreSize(newSizeButton)
+  }, [unicTagList.length, navigationRef])
+
+  useEffect(() => {
+    setCoursoreTransition(corsoreSize.height * activeTagIndex)
+  }, [activeTagIndex, corsoreSize])
 
   return (
-    <nav  className={styles.navigate} onClick={handleClickFilters}>
+    <nav className={styles.navigate} onClick={handleClickFilters}>
       <div className={styles.container} ref={navigationRef}>
         {unicTagList.map((filter: string, index: number) => (
           <NavLink key={filter} name={filter} index={index} />
         ))}
-        <div className={styles.coursore} style={{
-        transform: `translate(0, ${transitionY}px)`,
-        height: `${size.height}px`,
-        width: `${size.width}px`,
-      }}></div>
-      </div>
 
-      
+        <Coursore
+          width={corsoreSize.width}
+          height={corsoreSize.height}
+          transition={coursoreTransition}
+        />
+      </div>
     </nav>
   )
 })

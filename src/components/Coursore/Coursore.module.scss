@@ -1,0 +1,17 @@
+@use '../../styles/variables.scss' as var;
+$BG_LINK_ACTIVE: var.$color-gray-green;
+$RADIUS_ACTIVE: var.$radius-secondary;
+
+.coursore {
+  flex: 1;
+  width: calc(100% - 24px);
+  position: fixed;
+  top: 36px;
+  left: 36px;
+  transition: transform .4s ease-in-out;
+  transform: translate(0, 0);
+  box-sizing: border-box;
+  border-radius: $RADIUS_ACTIVE;
+  background: $BG_LINK_ACTIVE;
+  z-index: -1;
+}

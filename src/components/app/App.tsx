@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CoursesStateContext } from '../../context/CoursesStateContext'
-import { getFullCourses } from '../../fetches/getFullCourses'
+import { getFullCourses } from '../../services/courses'
 import { CourseType, TagType } from '../../types/couse.Type'
 import { Main } from '../Main'
 import { Navigate } from '../Navigate'
@@ -21,21 +21,25 @@ export const App = () => {
     })
   }, [])
 
+  console.log('render')
+
   return (
-    <div className={styles.app}>
-      <CoursesStateContext.Provider
-        value={{
-          activeTagIndex,
-          setActiveTagIndex,
-          renderCourses,
-          setRenderCourses,
-          unicTagList,
-          fullCourses,
-        }}
-      >
+    <CoursesStateContext.Provider
+      value={{
+        activeTagIndex,
+        setActiveTagIndex,
+        renderCourses,
+        setRenderCourses,
+        unicTagList,
+        fullCourses,
+      }}
+    >
+
+      <div className={styles.app}>
         <Navigate />
         <Main />
-      </CoursesStateContext.Provider>
-    </div>
+      </div>
+      
+    </CoursesStateContext.Provider>
   )
 }

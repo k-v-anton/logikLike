@@ -13,8 +13,13 @@ $INDENT_NAME: var.$indent-min var.$indent-medium var.$indent-medium;
   overflow: hidden;
   box-shadow: $SHADOW;
   border-radius: $RADIUS;
+  opacity: 0;
+  animation: load 1s ease-in-out forwards;
   @include mix.flexCCC;
+  
 }
+
+
 
 .image_container {
   width: 100%;
@@ -36,4 +41,14 @@ $INDENT_NAME: var.$indent-min var.$indent-medium var.$indent-medium;
 
 .course_name {
   @include mix.fontTitle;
+}
+
+
+@keyframes load {
+  0% {
+opacity: 0;
+  }
+  100% {
+opacity: 1;
+  }
 }
