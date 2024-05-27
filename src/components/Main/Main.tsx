@@ -1,10 +1,10 @@
-import { useCoursesContext } from '../../hooks/useCoursesContext'
+import { useCoursesGlobalContext } from '../../context/GlobalContext'
 import { CourseType } from '../../types/couse.Type'
 import { CourseCard } from '../CourseCard'
 import styles from './Main.module.scss'
 
 export const Main = () => {
-  const { renderCourses } = useCoursesContext()
+  const { renderCourses } = useCoursesGlobalContext()
 
   return (
     <main className={`${styles.courses} `}>

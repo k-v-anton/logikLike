@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useCoursesContext } from '../../hooks/useCoursesContext'
+import { useCoursesGlobalContext } from '../../context/GlobalContext'
 import styles from './NavLink.module.scss'
 
 type NavLinkProps = {
@@ -9,7 +9,7 @@ type NavLinkProps = {
 
 export const NavLink = memo((props: NavLinkProps) => {
   const { name, index } = props
-  const { activeTagIndex } = useCoursesContext()
+  const { activeTagIndex } = useCoursesGlobalContext()
 
   return (
     <button

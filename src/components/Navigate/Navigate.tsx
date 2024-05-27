@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react'
-import { useCoursesContext } from '../../hooks/useCoursesContext'
+import { useCoursesGlobalContext } from '../../context/GlobalContext'
 import { Coursore } from '../Coursore'
 import { NavLink } from '../NavLink'
 import { filterCoursesByActiveTag } from '../app/App.Asistent'
@@ -8,7 +8,7 @@ import { HandleClickFilterType, SizeButtonType } from './Navigate.Types'
 import styles from './Navigate.module.scss'
 
 export const Navigate = memo(() => {
-  const [coursoreTransition, setCoursoreTransition] = useState<number>(0)
+  const [activeTransition, setActiveTransition] = useState<number>(0)
   const [corsoreSize, setCoursoreSize] = useState<SizeButtonType>({
     width: 0,
     height: 0,
@@ -22,7 +22,7 @@ export const Navigate = memo(() => {
     setRenderCourses,
     fullCourses,
     activeTagIndex,
-  } = useCoursesContext()
+  } = useCoursesGlobalContext()
 
   const handleClickFilters: HandleClickFilterType = (e) => {
     if (!(e.target instanceof HTMLButtonElement)) return
@@ -40,14 +40,14 @@ export const Navigate = memo(() => {
   }
 
   useEffect(() => {
+    if (!unicTagList.length || !navigationRef) return
+
     const newSizeButton = calcCousoreSize(navigationRef, unicTagList.length)
 
     setCoursoreSize(newSizeButton)
-  }, [unicTagList.length, navigationRef])
+    setActiveTransition(newSizeButton.height * activeTagIndex)
+  }, [unicTagList.length, navigationRef, activeTagIndex])
 
-  useEffect(() => {
-    setCoursoreTransition(corsoreSize.height * activeTagIndex)
-  }, [activeTagIndex, corsoreSize])
 
   return (
     <nav className={styles.navigate} onClick={handleClickFilters}>
@@ -59,7 +59,7 @@ export const Navigate = memo(() => {
         <Coursore
           width={corsoreSize.width}
           height={corsoreSize.height}
-          transition={coursoreTransition}
+          transition={activeTransition}
         />
       </div>
     </nav>
