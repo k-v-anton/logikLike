@@ -1,0 +1,15 @@
+@use 'reset-css';
+
+@font-face {
+  font-family: nunito;
+  font-weight: 800;
+  font-style: normal;
+  src: url('./fonts/Nunito-ExtraBold.ttf');
+}
+
+* {
+  font-family: nunito;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

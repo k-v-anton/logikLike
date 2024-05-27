@@ -1,0 +1,11 @@
+@use '../../styles/variables.scss' as var;
+
+$INDENT : var.$indent-max;
+$BG_COLOR: var.$color-white;
+
+.app {
+  display: flex;
+  background-color: $BG_COLOR;
+  gap: $INDENT;
+  padding: $INDENT;
+}

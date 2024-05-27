@@ -1,0 +1,23 @@
+@use '../../styles/variables.scss' as var;
+@use '../../styles/mixins.scss' as mix;
+
+$RADIUS: var.$radius-secondary;
+$INDENT: var.$indent-min;
+$BG_LINK_ACTIVE: var.$color-gray-green;
+$TEXT_COLOR_ACTIVE: var.$color-white;
+$LINK_SIZE: calc(var.$navbar-size - var.$indent-max);
+
+.navLink {
+  border: none;
+  padding: $INDENT;
+  width: $LINK_SIZE;
+  border-radius: $RADIUS;
+  background-color: transparent;
+  transition: color .4s ease-in-out;
+
+  @include mix.fontTitle;
+}
+
+.active {
+  color: $TEXT_COLOR_ACTIVE;
+}

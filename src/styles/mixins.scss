@@ -1,0 +1,24 @@
+@use './variables.scss' as var;
+
+@mixin flexCCC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flexCC {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin fontTitle {
+  text-align: start;
+  font-style: normal;
+  font-family: var.$font-Family-primary;
+  font-weight: var.$font-weight-extra-bold;
+  font-size: var.$font-size-primary;
+  line-height: var.$line-height-primary;
+  color: var.$color-gray-blue;
+}

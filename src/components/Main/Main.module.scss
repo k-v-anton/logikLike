@@ -1,0 +1,12 @@
+@use '../../styles/variables.scss' as var;
+
+$GRID: repeat(3, 1fr);
+$INDENT: var.$indent-medium;
+
+.courses {
+  flex: 1;
+  display: grid;
+  height: fit-content;
+  grid-template-columns: $GRID;
+  gap: $INDENT;
+}

@@ -1,0 +1,23 @@
+{
+  "usesTypeScript": true,
+  "usesStyledComponents": true,
+  "cssPreprocessor": "scss",
+  "testLibrary": "Testing Library",
+  "component": {
+    "default": {
+      "customTemplates": {
+        "component": "templates/component/TemplateName.tsx",
+        "style": "templates/component/TemplateName.module.scss",
+        "index": "templates/component/index.ts",
+        "types": "templates/component/TemplateName.Types.ts"
+      },
+      "path": "src/components",
+      "withStyle": true,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false,
+      "withIndex": true,
+      "withTypes": false
+    }    
+  }
+}
