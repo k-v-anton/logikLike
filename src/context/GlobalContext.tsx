@@ -1,7 +1,7 @@
 import { Dispatch, createContext, useContext, useEffect, useState } from 'react'
-import { CourseType, TagType } from '../types/couse.Type'
-import { getFullCourses } from '../services/courses'
 import { getUnicTags } from '../components/app/App.Asistent'
+import { getFullCourses } from '../services/courses'
+import { CourseType, TagType } from '../types/couse.Type'
 
 type GlobalContextType = {
   activeTagIndex: number

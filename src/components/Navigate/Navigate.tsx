@@ -48,7 +48,6 @@ export const Navigate = memo(() => {
     setActiveTransition(newSizeButton.height * activeTagIndex)
   }, [unicTagList.length, navigationRef, activeTagIndex])
 
-
   return (
     <nav className={styles.navigate} onClick={handleClickFilters}>
       <div className={styles.container} ref={navigationRef}>
